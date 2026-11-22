@@ -1,14 +1,17 @@
-"""the-plan-make-fun-will-carry - v1.
+"""the-plan-make-fun-will-carry - v2.
 
 Competition: the-plan-make-fun-will-carry-20261122-2138 (program/v1).
 Writes a 30-day plan for an AI agent to turn $100 into as much money as
 possible, to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt).
-Stdlib only, deterministic, no network. v1 plan: 275 chars.
+Stdlib only, deterministic, no network. v2 plan: 274 chars.
+
+Changes vs v1: adds a $29/mo upkeep retainer and "One script serves all"
+(near-zero marginal cost per new client), tightens the offer wording.
 """
 
 import os
 
-PLAN = "Day 1: list 300 US plumbers off Google Maps with no online booking; email owners a $99 AI missed-call text-back + review replies on Twilio (their keys). $100: Twilio credits + Apollo trial. Close 4-6; target $400-600 by day 30. No replies by day 7: halve price, switch niche."
+PLAN = "Day 1: list 300 US plumbers on Google Maps with no online booking; email owners a $99 AI missed-call textback + reviews (Twilio, their keys), $29/mo upkeep. One script serves all. $100: Twilio + Apollo. Close 4-6; target $400-600 by day 30. No replies by day 7: halve price."
 
 
 def main():
