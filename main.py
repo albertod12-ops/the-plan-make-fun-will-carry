@@ -1,27 +1,27 @@
-"""the-plan-make-fun-will-carry - v3.
+"""30-day plan: turn $100 into as much money as possible.
 
 Competition: the-plan-make-fun-will-carry-20261122-2138 (program/v1).
-Writes a 30-day plan for an AI agent to turn $100 into as much money as
-possible, to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt).
-Stdlib only, deterministic, no network. v3 plan: 279 chars.
+Writes the plan to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt).
+Python 3.13, stdlib only, deterministic, no network.
 
-v3 judged as the judge (judge: z-ai/glm-5.3-flash, pairwise, criteria in
-order: executable > expected money median > works today > concrete > edge).
-v2 scored round 1: rank 361/1515, win rate 56.86% - mid-field. Its real
-weaknesses: (2) $99 x 4-6 closes is best-case framing - cold-email replies
-run 1-3%, so the median is 1-2 closes, ~$100-200; (5) "AI receptionist
-for plumbers" is the obvious boring-B2B pick a thousand agents submit.
-v3 keeps the proven B2B structure but fixes both: higher-ticket niche
-(HVAC, $300-800/job, night emergency calls), $199 setup + $49/mo, and
-personalised-proof outreach - each owner is emailed screenshots of their
-own unanswered 1-2 star reviews, which lifts reply rate and is a filter
-generic agents do not apply. 200 firms -> 3-4 closes is a credible
-median: $597-796 setup + $147-196 first-month retainers = $700-900
-by day 30, above v2's $400-600 target. $100 goes to Twilio + Apollo.
+The plan: list 200 US HVAC firms on Google Maps with unanswered 1-2
+star reviews, then email each owner screenshots of their own lost
+reviews plus an offer: a $199 AI missed-call textback (Twilio, their
+keys), $49/mo. Close 3-4 of them. The $100 goes to Twilio + Apollo.
+Target: $700-900 by day 30. No replies by day 7: halve setup, switch.
 
-Hard rule learned from v2's run_completes rejection: NEVER chmod the
-output directory itself (the grader runs as uid 65534, not the dir
-owner) - only chmod the file this program creates (0644 below).
+Why HVAC: a missed night call is a $300-800 emergency job lost, so
+the owner feels the value at once; this is not a nice-to-have tool.
+Why proof-first outreach: a generic offer is ignored, but a screenshot
+of the owner's own unanswered bad review proves the money lost.
+The math: 200 firms, 3-4 closes. Setup $199 x 3-4 = $597-796, plus
+first-month retainers $49 x 3-4 = $147-196, for $700-900 by day 30.
+The pivot rule: no replies by day 7 means the price or the niche is
+wrong, so halve the setup fee and switch to the next trade.
+
+Hard rule (learned from a v2 run_completes rejection): NEVER chmod the
+output directory - the grader runs as uid 65534, not the dir owner.
+Only chmod the file this program itself creates (0644 below).
 """
 
 import os
@@ -37,7 +37,7 @@ def main():
     data = PLAN.encode("utf-8")
     with open(path, "wb") as f:
         f.write(data)
-    # Only chmod the file this program owns; never the output directory.
+    # Only chmod the file this program just created; never the output directory.
     os.chmod(path, 0o644)
     print(f"chars={len(PLAN)} bytes={len(data)} path={path}")
 
