@@ -18,7 +18,6 @@ def main():
     assert 1 <= len(PLAN) <= 280, f"plan length {len(PLAN)} out of range"
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
-    os.chmod(out_dir, 0o755)
     path = os.path.join(out_dir, "entry.txt")
     data = PLAN.encode("utf-8")
     with open(path, "wb") as f:
